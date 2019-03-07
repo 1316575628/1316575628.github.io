@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="某黑心工作室的游戏数据分享1、切入点   在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
+<meta name="description" content="某黑心工作室的游戏数据分享 1、切入点  在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
 <meta name="keywords" content="教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据分享">
 <meta property="og:url" content="http://yoursite.com/2019/03/07/sifx/index.html">
 <meta property="og:site_name" content="十三大人爱小初">
-<meta property="og:description" content="某黑心工作室的游戏数据分享1、切入点   在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
+<meta property="og:description" content="某黑心工作室的游戏数据分享 1、切入点  在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-07T14:01:54.583Z">
+<meta property="og:updated_time" content="2019-03-07T14:24:53.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分享">
-<meta name="twitter:description" content="某黑心工作室的游戏数据分享1、切入点   在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
+<meta name="twitter:description" content="某黑心工作室的游戏数据分享 1、切入点  在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！   根据栈中的返回地址，逐级返回分析相关代码如下：   00441991   |.  E8 4AC3FEFF        call Client.0042DCE0  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送  {">
 
 
 
@@ -354,8 +354,8 @@
       
 
       
-        <p>某黑心工作室的游戏数据分享<br>1、切入点</p>
-<p>  在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！</p>
+        <p>某黑心工作室的游戏数据分享</p>
+<h1 id="1、切入点"><a href="#1、切入点" class="headerlink" title="1、切入点"></a>1、切入点</h1><p>  在WSASend函数上下断，移动一下人物，游戏会向服务器发送数据封包，程序断在0042DE13这个函数调用处！</p>
 <p>  根据栈中的返回地址，逐级返回分析相关代码如下：</p>
 <p>  00441991   |.  E8 4AC3FEFF        call Client.0042DCE0<br>  // 该函数是一个公用函数,游戏中所有的数据包都经过这个函数 加密发送<br>  { //加密发送数据包<br>    0042DCE0   /$  55                 push ebp<br>    0042DCE1   |.  8BEC               mov ebp,esp<br>    0042DCE3   |.  B8 0C240000        mov eax,240C<br>    0042DCE8   |.  E8 C3852F00        call Client.007262B0  //堆栈处理<br>    {<br>      007262B0   /$  51                 push ecx<br>      007262B1   |.  3D 00100000        cmp eax,1000<br>      007262B6   |.  8D4C24 08          lea ecx,dword ptr ss:[esp+8]<br>      007262BA   |.  72 14              jb short Client.007262D0<br>      007262BC   |&gt;  81E9 00100000      /sub ecx,1000<br>      007262C2   |.  2D 00100000        |sub eax,1000<br>      007262C7   |.  8501               |test dword ptr ds:[ecx],eax<br>      007262C9   |.  3D 00100000        |cmp eax,1000<br>      007262CE   |.^ 73 EC              /jnb short Client.007262BC<br>      007262D0   |&gt;  2BC8               sub ecx,eax<br>      007262D2   |.  8BC4               mov eax,esp<br>      007262D4   |.  8501               test dword ptr ds:[ecx],eax<br>      007262D6   |.  8BE1               mov esp,ecx<br>      007262D8   |.  8B08               mov ecx,dword ptr ds:[eax]<br>      007262DA   |.  8B40 04            mov eax,dword ptr ds:[eax+4]<br>      007262DD   |.  50                 push eax<br>      007262DE   /.  C3                 retn<br>    }<br>    0042DCED   |.  8B41 10            mov eax,dword ptr ds:[ecx+10]<br>    0042DCF0   |.  53                 push ebx<br>    0042DCF1   |.  56                 push esi<br>    0042DCF2   |.  83F8 FF            cmp eax,-1<br>    0042DCF5   |.  57                 push edi<br>    0042DCF6   |.  894D FC            mov dword ptr ss:[ebp-4],ecx<br>    0042DCF9   |.  0F84 29010000      je Client.0042DE28<br>    0042DCFF   |.  8079 14 01         cmp byte ptr ds:[ecx+14],1<br>    0042DD03   |.  0F85 1F010000      jnz Client.0042DE28<br>    0042DD09   |.  8B5D 08            mov ebx,dword ptr ss:[ebp+8]<br>    0042DD0C   |.  66:A1 F44B2F04     mov ax,word ptr ds:[42F4BF4]  // 0x03A2<br>    0042DD12   |.  B9 00080000        mov ecx,800<br>    0042DD17   |.  8DBD F4DBFFFF      lea edi,dword ptr ss:[ebp-240C]<br>    0042DD1D   |.  66:8903            mov word ptr ds:[ebx],ax<br>    0042DD20   |.  33C0               xor eax,eax<br>    0042DD22   |.  F3:AB              rep stos dword ptr es:[edi]  // edi 清零<br>    0042DD24   |.  8B45 0C            mov eax,dword ptr ss:[ebp+C]<br>    0042DD27   |.  8BF3               mov esi,ebx<br>    0042DD29   |.  8DBD F9DBFFFF      lea edi,dword ptr ss:[ebp-2407]  //数据开始地址</p>
 <pre><code>0042DD2F   |.  C685 F4DBFFFF AA   mov byte ptr ss:[ebp-240C],0AA   //数据开始标志
@@ -762,8 +762,7 @@
 <ol start="4">
 <li>另一次运算 查表法<br>AA 55<br>37 00 01 B0 01 06 D0 49 C5 B4 DD 20 12 C2 E7 2E 0F 43 7C 8D 4E 67 01 81 81 01 60 83 BD E4 EA 7B 35 A7 5B 44 9D 67 ED 54 C5 3E 28 66 99 8D 21 02 50<br>43 7C C8 30 56 CC 0E 00<br>55 AA<br>*/</li>
 </ol>
-<p>2、 功能分析</p>
-<pre><code>如果我们想分析游戏某项功能（如使用某种武功、补红、补蓝等）的实现，可以在此函数处下断，并在游
+<h1 id="2、-功能分析"><a href="#2、-功能分析" class="headerlink" title="2、 功能分析"></a>2、 功能分析</h1><pre><code>如果我们想分析游戏某项功能（如使用某种武功、补红、补蓝等）的实现，可以在此函数处下断，并在游
 </code></pre><p>  戏中触发相应的动作，当游戏断下来后，根据堆栈逐级回溯，一般就可以找到与实现该功能相关的某个函数，</p>
 <p>  并分析这个函数的传入参数，弄清楚其工作原理后，即可模拟调用该函数，实现该功能的自动化。</p>
 <p>  下面以拾取物品为例简单说明：</p>
@@ -775,8 +774,7 @@
 <p>  通过构造这样的缓冲区数据，可以直接CALL 0042AE90这个函数来自动拾取物品。</p>
 <p>  然后发现一个问题，用这种方法拾取物品（在一定范围内），游戏中人物虽然拾到了物品，但却没有</p>
 <p>  跑过去捡的动作，需要更妥善的解决方法才行。</p>
-<p>3、数据结构</p>
-<p>  现在能捡物品了，但面临的问题是：怎么才能知道游戏中何时有物品出现，并获取该物品的ID标识？</p>
+<h1 id="3、数据结构"><a href="#3、数据结构" class="headerlink" title="3、数据结构"></a>3、数据结构</h1><p>  现在能捡物品了，但面临的问题是：怎么才能知道游戏中何时有物品出现，并获取该物品的ID标识？</p>
 <p>  接下来要对游戏的数据结构进行分析。</p>
 <p>  在面向对象的设计时代，很多东东也变得好分析起来了。</p>
 <p>  游戏中有很多对象，如人物、怪物、物品等，要对这些进行处理，一般会在一个定时大循环中进行。</p>
@@ -873,16 +871,14 @@
 <p>  这个函数的传入参数就是物品对象的指针。</p>
 <p>  现在我们可以对整个对象数组进行扫描，找到类型为0x2F的对象（物品），然后根据其名称，位置等信息</p>
 <p>  用个定时器就可以实现自动捡物品了！</p>
-<p>4、操作函数</p>
-<p>  游戏基于面向对象思想设计，对对象的操作是通过pObject指针指向的一个函数实现的，分析发现，许多动</p>
+<h1 id="4、操作函数"><a href="#4、操作函数" class="headerlink" title="4、操作函数"></a>4、操作函数</h1><p>  游戏基于面向对象思想设计，对对象的操作是通过pObject指针指向的一个函数实现的，分析发现，许多动</p>
 <p>  作（如攻击怪物、拾取物品等）的操作函数是一致的（0043BC10），通过对该函数的调用关系进行分析写出</p>
 <p>  该函数的模拟调用函数DoObject如下：（idx是对象的索引）</p>
 <p>  void  DoObject(long idx)<br>  {<br>    unsigned char <em> pPlayer = (unsigned char </em>)(<em>(long </em>)0x11EaC88);<br>    (<em>(long </em>) 0xB0FF58) = idx;<br>    long addr = 0x43BC10;<br>    _asm<br>    {<br>      mov ecx,pPlayer<br>      push 0<br>      push 0x78<br>      push 3<br>      call addr<br>    }<br>  }</p>
 <p>  有了这个函数，很多事情就好办多了，例如：对怪物DoObject一次是锁定，第二次就可进行攻击，对物体DoObject</p>
 <p>  一次，即可自动拾取物品等等。。。</p>
 <p>  现在自动拾取物品已经完美解决了。</p>
-<p>5、自动辅助</p>
-<p>   有了上面的函数，可以用定时器实现自动搜索打怪（物理攻击）和自动拾取物品了。。。</p>
+<h1 id="5、自动辅助"><a href="#5、自动辅助" class="headerlink" title="5、自动辅助"></a>5、自动辅助</h1><p>   有了上面的函数，可以用定时器实现自动搜索打怪（物理攻击）和自动拾取物品了。。。</p>
 <p>   接下来该干什么了？对，武功、补红蓝、组队。。。（晕了-_-）</p>
 <p>   武功的分析方法可以用与前面的一样思路，根据发送武功数据包的函数回溯到指定的函数处。</p>
 <p>   游戏中的武功有两种，分别存放在两个指针数组中，好像还是指向了游戏对象数组中去的（记不大清楚了），游戏中</p>
@@ -896,15 +892,13 @@
 生命之类的位置相对固定，也很容易分析出来的。
 </code></pre><p>  组队也类似，有个指针数组存放各个队友，锁定使用相应的就OK了。</p>
 <p>  什么？还要自动行走？？？算法了吧，游戏辅助程序可6不是机器人。。。</p>
-<p>6、编制程序</p>
-<p>  有了以上的数据，再利用几个基本的编程技术，就可以制作一款私家游戏辅助工具了：</p>
+<h1 id="6、编制程序"><a href="#6、编制程序" class="headerlink" title="6、编制程序"></a>6、编制程序</h1><p>  有了以上的数据，再利用几个基本的编程技术，就可以制作一款私家游戏辅助工具了：</p>
 <p>  1）注入到游戏进程：全局钩子最简单、安全，用WH_GETMESSAGE就行。</p>
 <p>  2）HOOK游戏：为了安全起见最好不要对游戏代码进行HOOK。</p>
 <p>  3）创建新线程：在游戏内创建一个新线程，用个大循环来进行处理。</p>
 <p>  4）增强稳定性：新线程对游戏内部函数的直接调用，极有可能给游戏造成不稳定，用try catch补补偿一下吧。</p>
 <p>  5）不要散发给别人，否则，你知道的。。。</p>
-<p>7、更新支持</p>
-<p>  游戏经常会升级，导致以前分析过的的内存地址发生变化，需要对这些地址进行更新才行，也很简单，用OD分</p>
+<h1 id="7、更新支持"><a href="#7、更新支持" class="headerlink" title="7、更新支持"></a>7、更新支持</h1><p>  游戏经常会升级，导致以前分析过的的内存地址发生变化，需要对这些地址进行更新才行，也很简单，用OD分</p>
 <p>  别打开两个程序，根据旧版本地址附近的一些不变特征数据，在新版中找到相应的位置即可，常量的处理与此</p>
 <h2 id="类似，有些实在变化大，就用OD慢慢跟吧…"><a href="#类似，有些实在变化大，就用OD慢慢跟吧…" class="headerlink" title="  类似，有些实在变化大，就用OD慢慢跟吧…"></a>  类似，有些实在变化大，就用OD慢慢跟吧…</h2>
       
@@ -945,6 +939,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/cfdm/" rel="prev" title="CF手游GG修改器代码分享">
+                CF手游GG修改器代码分享 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1023,7 +1021,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1094,7 +1092,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类似，有些实在变化大，就用OD慢慢跟吧…"><span class="nav-number">1.</span> <span class="nav-text">  类似，有些实在变化大，就用OD慢慢跟吧…</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、切入点"><span class="nav-number">1.</span> <span class="nav-text">1、切入点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、-功能分析"><span class="nav-number">2.</span> <span class="nav-text">2、 功能分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、数据结构"><span class="nav-number">3.</span> <span class="nav-text">3、数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、操作函数"><span class="nav-number">4.</span> <span class="nav-text">4、操作函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、自动辅助"><span class="nav-number">5.</span> <span class="nav-text">5、自动辅助</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、编制程序"><span class="nav-number">6.</span> <span class="nav-text">6、编制程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7、更新支持"><span class="nav-number">7.</span> <span class="nav-text">7、更新支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类似，有些实在变化大，就用OD慢慢跟吧…"><span class="nav-number">7.1.</span> <span class="nav-text">  类似，有些实在变化大，就用OD慢慢跟吧…</span></a></li></ol></li></ol></div>
             
 
           </div>

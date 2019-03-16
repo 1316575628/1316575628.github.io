@@ -1818,7 +1818,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff5b;
+  background: #96bb90;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2657,8 +2657,15 @@ embed {
   display: inline-block;
 }
 body {
-  background: url("http://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/e4dde71190ef76c69c04859d9816fdfaae5167b5.jpg");
+  background: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552727060186&di=47e7d328f9b3e735573ee371fe1c9251&imgtype=0&src=http%3A%2F%2Fpicture.ik123.com%2Fuploads%2Fallimg%2F170626%2F12-1F626112348.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
+}
+.main-inner {
+  margin-top: 60px;
+  padding: 60px 60px 60px 60px;
+  background: #fff;
+  opacity: 0.8;
+  min-height: 500px;
 }
